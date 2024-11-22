@@ -14,7 +14,7 @@ const port = process.env.PORT || 5005;
 
 // Configuración de CORS
 app.use(cors({
-    origin: '*', // URL de tu cliente
+    origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
 }));
@@ -32,10 +32,9 @@ async function connectDB() {
 // Conectar a la base de datos
 connectDB();
 
-// Usar middleware global (por ejemplo, body parsing)
-app.use(express.json()); // Agregar middleware para parsear JSON
+// Usar middleware global 
+app.use(express.json());
 
-// Usar las rutas
 app.use('/auth', authRoutes);
 app.use('/api/cohorts', authMiddleware, cohortRoutes); // Protegemos las rutas si es necesario
 app.use('/api/students', authMiddleware, studentRoutes); // Protegemos las rutas si es necesario

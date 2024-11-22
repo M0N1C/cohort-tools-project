@@ -37,7 +37,7 @@ app.use(express.json()); // Agregar middleware para parsear JSON
 
 // Usar las rutas
 app.use('/auth', authRoutes);
-app.use('/cohorts', authMiddleware, cohortRoutes); // Protegemos las rutas si es necesario
+app.use('/api/cohorts', authMiddleware, cohortRoutes); // Protegemos las rutas si es necesario
 app.use('/api/students', authMiddleware, studentRoutes); // Protegemos las rutas si es necesario
 
 // Manejo de errores

@@ -50,8 +50,8 @@ export const AuthProviderWrapper = ({ children }) => {
   const signup = async (name, email, password) => {
     try {
       const response = await axios.post(`${API_URL}/auth/signup`, { name, email, password });
-      storeToken(response.data.token);
-      setUser(response.data.user);
+      response && storeToken(response.data.token);
+      response && setUser(response.data.user);
       setIsLoggedIn(true);
       navigate("/");
     } catch (error) {

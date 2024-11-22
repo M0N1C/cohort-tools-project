@@ -1,17 +1,18 @@
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // Middleware de autenticación
 const authMiddleware = (req, res, next) => {
     const token = req.headers['authorization'];
 
+    console.log(token)
     if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'defaultSecret');
-        req.user = decoded; // Agregar la información del usuario al request
-        next(); // Continuar al siguiente middleware o ruta
+        const decoded = bcrypt.compare(token, process.env.JWT_SECRET);
+        req.user = decoded; 
+        next(); 
     } catch (error) {
         res.status(400).json({ message: 'Invalid token.' });
     }
